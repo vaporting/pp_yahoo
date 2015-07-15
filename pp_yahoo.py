@@ -37,12 +37,17 @@ def parse_prod_name(page):
 	"""
 	parse product name from page
 	"""
+	"""
 	pd_name = []
 	line = page.readline()
 	while(line != None):
 		if ("<li class=\"yui3-u-1 name\">" in line):
 			print line
 		line = page.readline()
+	"""
+	soup = BeautifulSoup(page.read(),"lxml")
+	for li_line in soup.findAll("li", class_="yui3-u-1 name"):
+		print li_line
 
 
 if __name__ == '__main__':
@@ -58,4 +63,8 @@ if __name__ == '__main__':
 
 		#if "yui3-menu-label" in link['class']:
 		#	print link.get(href)
-	parse_url_bfs("https://tw.buy.yahoo.com/", 1)
+	
+
+	#parse_url_bfs("https://tw.buy.yahoo.com/", 1)
+	page = urllib.urlopen("https://tw.buy.yahoo.com/?catitemid=52982&hpp=sub410catid3955catitem52982")
+	parse_prod_name(page)
