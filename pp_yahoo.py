@@ -121,13 +121,25 @@ def distribute_parse_pn(file_num):
 			executor.submit(extract_file_and_parse, file_list[num-1], str(num_list[num-1]))
 			num += 1
 
-
+def combine_pares_pn_file(file_num):
+	num = 1
+	c_f = open("yahoo_pd_name.txt", "w+")
+	while(num <= file_num):
+		f = open("yahoo_pd_name_"+str(num)+".txt", "r+")
+		line = f.readline()
+		while(line != ""):
+			c_f.write(line)
+			line = f.readline()
+		f.close()
+		num += 1
+	c_f.close()
 
 
 if __name__ == '__main__':
 	#parse_url_bfs("https://tw.buy.yahoo.com/", 3)
 	#file_num = divide_url_all()
-	distribute_parse_pn(5)
+	#distribute_parse_pn(5)
+	combine_pares_pn_file(5)
 	"""
 	f = open("yahoo_pd_name.txt", "w+")
 	url_n = 0
